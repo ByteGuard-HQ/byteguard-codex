@@ -1,6 +1,6 @@
 # ByteGuard Codex
 
-> 🚧 ByteGuard Codex in currently under construction 🚧
+> 🚧 ByteGuard Codex in currently under development 🚧
 
 ## License
 
