@@ -262,3 +262,7 @@ __pycache__/
 
 # MacOS
 .DS_Store
+
+# Ignore built SPA assets
+**/ByteGuard.Codex.Api/wwwroot/*
+!**/ByteGuard.Codex.Api/wwwroot/.gitkeep
