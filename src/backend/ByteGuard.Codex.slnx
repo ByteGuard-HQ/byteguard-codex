@@ -1,0 +1,9 @@
+<Solution>
+  <Folder Name="/Application/">
+    <Project Path="ByteGuard.Codex.Api/ByteGuard.Codex.Api.csproj" />
+  </Folder>
+  <Folder Name="/Infrastructure/">
+    <Project Path="ByteGuard.Codex.Infrastructure/ByteGuard.Codex.Infrastructure.csproj" />
+  </Folder>
+  <Project Path="ByteGuard.Codex.Core/ByteGuard.Codex.Core.csproj" />
+</Solution>
