@@ -265,3 +265,6 @@ __pycache__/
 
 # Ignore built SPA assets
 **/ByteGuard.Codex.Api/wwwroot/
+
+# Database
+*.db

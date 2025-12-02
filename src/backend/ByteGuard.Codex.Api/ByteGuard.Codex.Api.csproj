@@ -2,21 +2,20 @@
 
   <PropertyGroup>
     <TargetFramework>net10.0</TargetFramework>
-    <Nullable>enable</Nullable>
-    <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="10.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="10.0.0">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="Scalar.AspNetCore" Version="2.11.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="../ByteGuard.Codex.Core/ByteGuard.Codex.Core.csproj" />
-    <ProjectReference Include="../ByteGuard.Codex.Infrastructure/ByteGuard.Codex.Infrastructure.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Controllers/" />
+    <ProjectReference Include="../ByteGuard.Codex.Infrastructure.Sqlite/ByteGuard.Codex.Infrastructure.Sqlite.csproj" />
   </ItemGroup>
 
 </Project>
