@@ -1,3 +1,4 @@
+using ByteGuard.Codex.Core.Services;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace ByteGuard.Codex.Core.Configuration;
@@ -10,6 +11,8 @@ public static class ServiceCollectionExtensions
     /// <param name="services">Sevice collection.</param>
     public static IServiceCollection AddCodexCore(this IServiceCollection services)
     {
+        services.AddTransient<ProjectService>();
+
         return services;
     }
 }
