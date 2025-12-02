@@ -23,7 +23,7 @@ public static class ServiceCollectionExtensions
 
         services.AddDbContext<ICodexDbContext, CodexDbContext>(options =>
         {
-            options.UseSqlite(connectionString);
+            options.UseSqlite(connectionString, opts => opts.UseQuerySplittingBehavior(QuerySplittingBehavior.SplitQuery));
             options.UseSeeding((context, _) =>
             {
                 foreach (var version in SupportedAsvsVersion)

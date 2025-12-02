@@ -16,6 +16,29 @@ public class ProjectService
     }
 
     /// <summary>
+    /// Get all projects metadata.
+    /// </summary>
+    /// <returns>List of <see cref="ProjectMetadata"/>.</returns>
+    public async Task<List<ProjectMetadata>> GetProjectsAsync()
+    {
+        var projects = await _context.Projects
+            .AsNoTracking()
+            .Select(p => new ProjectMetadata
+            {
+                Id = p.Id,
+                Title = p.Title,
+                Description = p.Description,
+                Owner = p.Owner,
+                Status = p.Status,
+                CreatedAt = p.CreatedAt,
+                ArchivedAt = p.ArchivedAt,
+                AsvsVersionId = p.AsvsVersionId
+            }).ToListAsync();
+
+        return projects;
+    }
+
+    /// <summary>
     /// Get project details.
     /// </summary>
     /// <param name="projectId">Project identifier.</param>

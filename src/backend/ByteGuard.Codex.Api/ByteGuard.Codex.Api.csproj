@@ -18,4 +18,8 @@
     <ProjectReference Include="../ByteGuard.Codex.Infrastructure.Sqlite/ByteGuard.Codex.Infrastructure.Sqlite.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot/" />
+  </ItemGroup>
+
 </Project>

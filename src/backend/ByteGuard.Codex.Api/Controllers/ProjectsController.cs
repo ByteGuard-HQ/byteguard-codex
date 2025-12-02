@@ -9,13 +9,26 @@ namespace ByteGuard.Codex.Api.Controllers
     [ApiController]
     [Consumes("application/json")]
     [Produces("application/json")]
-    public class ProjectsController : Controller
+    public class ProjectsController : ControllerBase
     {
         private readonly ProjectService _projectService;
 
         public ProjectsController(ProjectService projectService)
         {
             _projectService = projectService;
+        }
+
+        /// <summary>
+        /// Get projects
+        /// </summary>
+        /// <response code="200">Returns metadata about all projects.</response>
+        [HttpGet]
+        [ProducesResponseType<List<ProjectMetadata>>(StatusCodes.Status200OK)]
+        public async Task<IActionResult> GetProjects()
+        {
+            var projects = await _projectService.GetProjectsAsync();
+
+            return Ok(projects);
         }
 
         /// <summary>

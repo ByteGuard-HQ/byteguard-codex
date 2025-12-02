@@ -267,4 +267,4 @@ __pycache__/
 **/ByteGuard.Codex.Api/wwwroot/
 
 # Database
-*.db
+*.db**

@@ -11,6 +11,8 @@ public static class ServiceCollectionExtensions
     /// <param name="services">Sevice collection.</param>
     public static IServiceCollection AddCodexCore(this IServiceCollection services)
     {
+        // Add services.
+        services.AddTransient<AsvsService>();
         services.AddTransient<ProjectService>();
 
         return services;
