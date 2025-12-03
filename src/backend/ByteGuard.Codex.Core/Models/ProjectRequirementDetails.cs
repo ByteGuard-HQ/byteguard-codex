@@ -15,12 +15,12 @@ public record ProjectRequirementDetails
     /// <summary>
     /// ASVS requirement this project requirement is linked to.
     /// </summary>
-    public AsvsRequirementDetails Requirement { get; init; }
+    public required AsvsRequirementDetails Requirement { get; init; }
 
     /// <summary>
     /// Current status of this specific project requirement.
     /// </summary>
-    public RequirementStatus Status { get; init; }
+    public required RequirementStatus Status { get; init; }
 
     /// <summary>
     /// Optional requirements notes.

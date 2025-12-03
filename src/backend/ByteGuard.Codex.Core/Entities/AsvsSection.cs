@@ -18,12 +18,12 @@ public sealed class AsvsSection
     /// <remarks>
     /// E.g. <c>"V1.1"</c>.
     /// </remarks>
-    public AsvsCode Code { get; set; }
+    public required AsvsCode Code { get; set; }
 
     /// <summary>
     /// Section ordinal, defining the order within the chapter.
     /// </summary>
-    public int Ordinal { get; set; }
+    public required int Ordinal { get; set; }
 
     /// <summary>
     /// Section name.
@@ -31,20 +31,20 @@ public sealed class AsvsSection
     /// <remarks>
     /// E.g. "Encoding and Sanitization Architecture"
     /// </remarks>
-    public string Name { get; set; }
+    public required string Name { get; set; }
 
     /// <summary>
     /// Identifier of the chapter in which this section belongs.
     /// </summary>
-    public Guid AsvsChapterId { get; set; }
+    public required Guid AsvsChapterId { get; set; }
 
     /// <summary>
     /// Chapter in which this section belongs.
     /// </summary>
-    public AsvsChapter AsvsChapter { get; set; }
+    public AsvsChapter AsvsChapter { get; set; } = default!;
 
     /// <summary>
     /// Collection of all requirements within this section.
     /// </summary>
-    public ICollection<AsvsRequirement> AsvsRequirements { get; set; }
+    public ICollection<AsvsRequirement> AsvsRequirements { get; set; } = default!;
 }

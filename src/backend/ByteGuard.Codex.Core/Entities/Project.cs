@@ -15,7 +15,7 @@ public sealed class Project
     /// <summary>
     /// Project title.
     /// </summary>
-    public string Title { get; set; }
+    public required string Title { get; set; }
 
     /// <summary>
     /// Optional project description.
@@ -25,17 +25,17 @@ public sealed class Project
     /// <summary>
     /// Project owner.
     /// </summary>
-    public string Owner { get; set; }
+    public required string Owner { get; set; }
 
     /// <summary>
     /// Current status of the project.
     /// </summary>
-    public ProjectStatus Status { get; set; }
+    public required ProjectStatus Status { get; set; }
 
     /// <summary>
     /// Date and time of project creation.
     /// </summary>
-    public DateTime CreatedAt { get; set; }
+    public required DateTime CreatedAt { get; set; }
 
     /// <summary>
     /// Date and time of project archival.
@@ -45,15 +45,15 @@ public sealed class Project
     /// <summary>
     /// Identifier of the ASVS version this project is comitting to.
     /// </summary>
-    public Guid AsvsVersionId { get; set; }
+    public required Guid AsvsVersionId { get; set; }
 
     /// <summary>
     /// ASVS version this project is comitting to.
     /// </summary>
-    public AsvsVersion AsvsVersion { get; set; }
+    public AsvsVersion AsvsVersion { get; set; } = default!;
 
     /// <summary>
     /// Collection of all project requirements this project has comitted to.
     /// </summary>
-    public List<ProjectRequirement> Requirements { get; set; } = new();
+    public ICollection<ProjectRequirement> Requirements { get; set; } = default!;
 }

@@ -12,7 +12,7 @@ public record CreateAsvsChapterParameters
     /// </summary>
     [Required]
     [MaxLength(150)]
-    public string Title { get; init; }
+    public required string Title { get; init; }
 
     /// <summary>
     /// Optional chapter description.

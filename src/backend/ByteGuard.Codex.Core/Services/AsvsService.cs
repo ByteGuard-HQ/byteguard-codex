@@ -66,20 +66,20 @@ public class AsvsService
                 Chapters = v.AsvsChapters.Select(c => new AsvsChapterDetails
                 {
                     Id = c.Id,
-                    Code = c.Code,
+                    Code = c.Code.ToVersionString(),
                     Ordinal = c.Ordinal,
                     Title = c.Title,
                     Description = c.Description,
                     Sections = c.AsvsSections.Select(s => new AsvsSectionDetails
                     {
                         Id = s.Id,
-                        Code = s.Code,
+                        Code = s.Code.ToVersionString(),
                         Ordinal = s.Ordinal,
                         Name = s.Name,
                         Requirements = s.AsvsRequirements.Select(r => new AsvsRequirementDetails
                         {
                             Id = r.Id,
-                            Code = r.Code,
+                            Code = r.Code.ToVersionString(),
                             Ordinal = r.Ordinal,
                             Description = r.Description,
                             Level = r.Level
@@ -106,10 +106,12 @@ public class AsvsService
             throw new InvalidOperationException($"ASVS version with name '{name}' and version number '{versionNumber}' already exists.");
         }
 
-        var version = new AsvsVersion();
-        version.VersionNumber = versionNumber;
-        version.Name = name;
-        version.Description = description;
+        var version = new AsvsVersion()
+        {
+            VersionNumber = versionNumber,
+            Name = name,
+            Description = description
+        };
 
         await _context.AsvsVersions.AddAsync(version);
         await _context.SaveChangesAsync();
@@ -119,7 +121,8 @@ public class AsvsService
             Id = version.Id,
             VersionNumber = version.VersionNumber,
             Name = version.Name,
-            Description = version.Description
+            Description = version.Description,
+            IsReadOnly = version.IsReadOnly
         };
     }
 
@@ -182,12 +185,14 @@ public class AsvsService
 
         var calculatedOrdinal = currentOrdinal is null ? 1 : currentOrdinal.Value + 1;
 
-        var chapter = new AsvsChapter();
-        chapter.Code = new AsvsCode(calculatedOrdinal);
-        chapter.Ordinal = calculatedOrdinal;
-        chapter.Title = title;
-        chapter.Description = description;
-        chapter.AsvsVersionId = versionId;
+        var chapter = new AsvsChapter
+        {
+            Code = new AsvsCode(calculatedOrdinal),
+            Ordinal = calculatedOrdinal,
+            Title = title,
+            Description = description,
+            AsvsVersionId = versionId
+        };
 
         await _context.AsvsChapters.AddAsync(chapter);
         await _context.SaveChangesAsync();
@@ -195,10 +200,11 @@ public class AsvsService
         return new AsvsChapterDetails
         {
             Id = chapter.Id,
-            Code = chapter.Code,
+            Code = chapter.Code.ToVersionString(),
             Ordinal = chapter.Ordinal,
             Title = chapter.Title,
-            Description = chapter.Description
+            Description = chapter.Description,
+            Sections = new List<AsvsSectionDetails>().AsReadOnly()
         };
     }
 
@@ -266,11 +272,13 @@ public class AsvsService
 
         var calculatedOrdinal = currentOrdinal is null ? 1 : currentOrdinal.Value + 1;
 
-        var section = new AsvsSection();
-        section.Code = new AsvsCode(chapter.Ordinal, calculatedOrdinal);
-        section.Ordinal = calculatedOrdinal;
-        section.Name = name;
-        section.AsvsChapterId = chapterId;
+        var section = new AsvsSection
+        {
+            Code = new AsvsCode(chapter.Ordinal, calculatedOrdinal),
+            Ordinal = calculatedOrdinal,
+            Name = name,
+            AsvsChapterId = chapterId
+        };
 
         await _context.AsvsSections.AddAsync(section);
         await _context.SaveChangesAsync();
@@ -278,9 +286,10 @@ public class AsvsService
         return new AsvsSectionDetails
         {
             Id = section.Id,
-            Code = section.Code,
+            Code = section.Code.ToVersionString(),
             Ordinal = section.Ordinal,
-            Name = section.Name
+            Name = section.Name,
+            Requirements = new List<AsvsRequirementDetails>().AsReadOnly()
         };
     }
 
@@ -355,12 +364,14 @@ public class AsvsService
 
         var calculatedOrdinal = currentOrdinal is null ? 1 : currentOrdinal.Value + 1;
 
-        var requirement = new AsvsRequirement();
-        requirement.Code = new AsvsCode(chapter.Ordinal, section.Ordinal, calculatedOrdinal);
-        requirement.Ordinal = calculatedOrdinal;
-        requirement.Description = description;
-        requirement.Level = level;
-        requirement.AsvsSectionId = sectionId;
+        var requirement = new AsvsRequirement
+        {
+            Code = new AsvsCode(chapter.Ordinal, section.Ordinal, calculatedOrdinal),
+            Ordinal = calculatedOrdinal,
+            Description = description,
+            Level = level,
+            AsvsSectionId = sectionId
+        };
 
         await _context.AsvsRequirements.AddAsync(requirement);
         await _context.SaveChangesAsync();
@@ -368,7 +379,7 @@ public class AsvsService
         return new AsvsRequirementDetails
         {
             Id = requirement.Id,
-            Code = requirement.Code,
+            Code = requirement.Code.ToVersionString(),
             Ordinal = requirement.Ordinal,
             Description = requirement.Description,
             Level = requirement.Level

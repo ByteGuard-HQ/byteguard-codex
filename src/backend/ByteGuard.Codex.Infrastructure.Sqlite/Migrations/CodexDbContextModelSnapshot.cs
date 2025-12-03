@@ -44,7 +44,7 @@ namespace ByteGuard.Codex.Infrastructure.Sqlite.Migrations
 
                     b.HasIndex("AsvsVersionId");
 
-                    b.ToTable("AsvsChapters");
+                    b.ToTable("AsvsChapters", (string)null);
                 });
 
             modelBuilder.Entity("ByteGuard.Codex.Core.Entities.AsvsRequirement", b =>
@@ -74,7 +74,7 @@ namespace ByteGuard.Codex.Infrastructure.Sqlite.Migrations
 
                     b.HasIndex("AsvsSectionId");
 
-                    b.ToTable("AsvsRequirements");
+                    b.ToTable("AsvsRequirements", (string)null);
                 });
 
             modelBuilder.Entity("ByteGuard.Codex.Core.Entities.AsvsSection", b =>
@@ -101,7 +101,7 @@ namespace ByteGuard.Codex.Infrastructure.Sqlite.Migrations
 
                     b.HasIndex("AsvsChapterId");
 
-                    b.ToTable("AsvsSections");
+                    b.ToTable("AsvsSections", (string)null);
                 });
 
             modelBuilder.Entity("ByteGuard.Codex.Core.Entities.AsvsVersion", b =>
@@ -126,7 +126,7 @@ namespace ByteGuard.Codex.Infrastructure.Sqlite.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("AsvsVersions");
+                    b.ToTable("AsvsVersions", (string)null);
                 });
 
             modelBuilder.Entity("ByteGuard.Codex.Core.Entities.Project", b =>
@@ -162,7 +162,7 @@ namespace ByteGuard.Codex.Infrastructure.Sqlite.Migrations
 
                     b.HasIndex("AsvsVersionId");
 
-                    b.ToTable("Projects");
+                    b.ToTable("Projects", (string)null);
                 });
 
             modelBuilder.Entity("ByteGuard.Codex.Core.Entities.ProjectRequirement", b =>
@@ -195,7 +195,7 @@ namespace ByteGuard.Codex.Infrastructure.Sqlite.Migrations
 
                     b.HasIndex("ProjectId");
 
-                    b.ToTable("ProjectRequirements");
+                    b.ToTable("ProjectRequirements", (string)null);
                 });
 
             modelBuilder.Entity("ByteGuard.Codex.Core.Entities.AsvsChapter", b =>

@@ -60,7 +60,7 @@ public readonly record struct AsvsCode : IComparable<AsvsCode>, IEquatable<AsvsC
     /// E.g. <c>"V1"</c> for chapters, <c>"V1.1"</c> for section, and <c>"V1.1.1"</c> for requirements.
     /// </remarks>
     /// <returns>String representation of the <see cref="AsvsCode"/>.</returns>
-    public override string ToString()
+    public string ToVersionString()
     {
         if (Section is null) return $"V{Chapter}";
         if (Requirement is null) return $"V{Chapter}.{Section}";

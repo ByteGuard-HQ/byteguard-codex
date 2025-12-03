@@ -18,12 +18,12 @@ public record AsvsChapterDetails
     /// <remarks>
     /// E.g. <c>"V1"</c>.
     /// </remarks>
-    public AsvsCode Code { get; init; }
+    public required string Code { get; init; }
 
     /// <summary>
     /// Chapter ordinal, defining the order within the ASVS version.
     /// </summary>
-    public int Ordinal { get; init; }
+    public required int Ordinal { get; init; }
 
     /// <summary>
     /// Chapter title.
@@ -31,7 +31,7 @@ public record AsvsChapterDetails
     /// <remarks>
     /// E.g. "Encoding and Sanitization".
     /// </remarks>
-    public string Title { get; init; }
+    public required string Title { get; init; }
 
     /// <summary>
     /// Optional chapter description.
@@ -41,5 +41,5 @@ public record AsvsChapterDetails
     /// <summary>
     /// Collection of all sections within this chapter.
     /// </summary>
-    public IReadOnlyList<AsvsSectionDetails> Sections { get; init; }
+    public required IReadOnlyList<AsvsSectionDetails> Sections { get; init; }
 }

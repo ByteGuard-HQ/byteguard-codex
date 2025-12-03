@@ -16,7 +16,7 @@ public sealed class AsvsVersion
     /// <remarks>
     /// E.g. <c>"0.1.0"</c>, <c>"1.0.0"</c> or <c>"4.0.3"</c>.
     /// </remarks>
-    public string VersionNumber { get; set; }
+    public required string VersionNumber { get; set; }
 
     /// <summary>
     /// ASVS version name.
@@ -24,7 +24,7 @@ public sealed class AsvsVersion
     /// <remarks>
     /// E.g. "Organization XYZ ASVS" or "OWASP ASVS v5.0.0"
     /// </remarks>
-    public string Name { get; set; }
+    public required string Name { get; set; }
 
     /// <summary>
     /// Optional ASVS version description.

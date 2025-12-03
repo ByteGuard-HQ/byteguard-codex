@@ -15,14 +15,14 @@ public record CreateAsvsVersionParameters
     /// </remarks>
     [Required]
     [MaxLength(10)]
-    public string VersionNumber { get; init; }
+    public required string VersionNumber { get; init; }
 
     /// <summary>
     /// ASVS version name.
     /// </summary>
     [Required]
     [MaxLength(100)]
-    public string Name { get; init; }
+    public required string Name { get; init; }
 
     /// <summary>
     /// Optional ASVS version description.

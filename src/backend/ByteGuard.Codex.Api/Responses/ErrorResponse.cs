@@ -8,5 +8,5 @@ public record ErrorResponse
     /// <summary>
     /// Error message.
     /// </summary>
-    public string Message { get; set; }
+    public required string Message { get; set; }
 }

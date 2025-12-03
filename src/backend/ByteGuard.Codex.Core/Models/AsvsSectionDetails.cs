@@ -10,7 +10,7 @@ public record AsvsSectionDetails
     /// <summary>
     /// Section identifier.
     /// </summary>
-    public Guid Id { get; init; }
+    public required Guid Id { get; init; }
 
     /// <summary>
     /// ASVS short code used to identifiy and reference the section.
@@ -18,13 +18,12 @@ public record AsvsSectionDetails
     /// <remarks>
     /// E.g. <c>"V1.1"</c>.
     /// </remarks>
-
-    public AsvsCode Code { get; init; }
+    public required string Code { get; init; }
 
     /// <summary>
     /// Section ordinal, defining the order within the chapter.
     /// </summary>
-    public int Ordinal { get; init; }
+    public required int Ordinal { get; init; }
 
     /// <summary>
     /// Section name.
@@ -32,10 +31,10 @@ public record AsvsSectionDetails
     /// <remarks>
     /// E.g. "Encoding and Sanitization Architecture"
     /// </remarks>
-    public string Name { get; init; }
+    public required string Name { get; init; }
 
     /// <summary>
     /// Collection of all requirements within this section.
     /// </summary>
-    public IReadOnlyList<AsvsRequirementDetails> Requirements { get; init; }
+    public required IReadOnlyList<AsvsRequirementDetails> Requirements { get; init; }
 }

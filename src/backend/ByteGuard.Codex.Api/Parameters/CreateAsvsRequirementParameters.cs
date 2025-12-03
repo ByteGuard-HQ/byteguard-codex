@@ -14,11 +14,11 @@ public record CreateAsvsRequirementParameters
     /// </summary>
     [Required]
     [MaxLength(1500)]
-    public string Description { get; init; }
+    public required string Description { get; init; }
 
     /// <summary>
     /// Appropriate ASVS level for the requirement.
     /// </summary>
     [Required]
-    public AsvsLevel Level { get; init; }
+    public required AsvsLevel Level { get; init; }
 }

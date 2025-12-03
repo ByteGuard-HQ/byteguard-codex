@@ -11,7 +11,7 @@ public record AsvsRequirementDetails
     /// <summary>
     /// Requirement identifier.
     /// </summary>
-    public Guid Id { get; init; }
+    public required Guid Id { get; init; }
 
     /// <summary>
     /// ASVS short code used to identifiy and reference the requirement.
@@ -19,20 +19,20 @@ public record AsvsRequirementDetails
     /// <remarks>
     /// E.g. <c>"V1.1.1"</c>.
     /// </remarks>
-    public AsvsCode Code { get; init; }
+    public required string Code { get; init; }
 
     /// <summary>
     /// Requirement ordinal, defining the order within the section.
     /// </summary>
-    public int Ordinal { get; init; }
+    public required int Ordinal { get; init; }
 
     /// <summary>
     /// Requirement description.
     /// </summary>
-    public string Description { get; init; }
+    public required string Description { get; init; }
 
     /// <summary>
     /// Appropriate ASVS level for the requirement.
     /// </summary>
-    public AsvsLevel Level { get; init; }
+    public required AsvsLevel Level { get; init; }
 }

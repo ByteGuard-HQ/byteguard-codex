@@ -15,12 +15,12 @@ public class ProjectRequirement
     /// <summary>
     /// Current status of this specific project requirement.
     /// </summary>
-    public RequirementStatus Status { get; set; }
+    public required RequirementStatus Status { get; set; }
 
     /// <summary>
     /// ASVS requirement this project requirement is linked to.
     /// </summary>
-    public AsvsRequirement AsvsRequirement { get; set; }
+    public required AsvsRequirement AsvsRequirement { get; set; }
 
     /// <summary>
     /// Optional requirements notes.

@@ -7,7 +7,7 @@ internal class AsvsCodeConverter : ValueConverter<AsvsCode, string>
 {
     public AsvsCodeConverter()
         : base(
-            v => v.ToString(),
+            v => v.ToVersionString(),
             v => AsvsCode.Parse(v)
         )
     {

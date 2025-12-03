@@ -19,30 +19,30 @@ public sealed class AsvsRequirement
     /// <remarks>
     /// E.g. <c>"V1.1.1"</c>.
     /// </remarks>
-    public AsvsCode Code { get; set; }
+    public required AsvsCode Code { get; set; }
 
     /// <summary>
     /// Requirement ordinal, defining the order within the section.
     /// </summary>
-    public int Ordinal { get; set; }
+    public required int Ordinal { get; set; }
 
     /// <summary>
     /// Requirement description.
     /// </summary>
-    public string Description { get; set; }
+    public required string Description { get; set; }
 
     /// <summary>
     /// Appropriate ASVS level for the requirement.
     /// </summary>
-    public AsvsLevel Level { get; set; }
+    public required AsvsLevel Level { get; set; }
 
     /// <summary>
     /// Identifier of the section in which this requirement belongs.
     /// </summary>
-    public Guid AsvsSectionId { get; set; }
+    public required Guid AsvsSectionId { get; set; }
 
     /// <summary>
     /// Section in which this requirement belongs.
     /// </summary>
-    public AsvsSection AsvsSection { get; set; }
+    public AsvsSection AsvsSection { get; set; } = default!;
 }

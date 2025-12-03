@@ -12,7 +12,7 @@ public class CreateProjectParameters
     /// </summary>
     [Required]
     [MaxLength(100)]
-    public string Title { get; set; }
+    public required string Title { get; set; }
 
     /// <summary>
     /// Optional project description.
@@ -25,11 +25,11 @@ public class CreateProjectParameters
     /// </summary>
     [Required]
     [MaxLength(100)]
-    public string Owner { get; init; }
+    public required string Owner { get; init; }
 
     /// <summary>
     /// The ASVS version this project is comitting to.
     /// </summary>
     [Required]
-    public Guid AsvsVersionId { get; init; }
+    public required Guid AsvsVersionId { get; init; }
 }

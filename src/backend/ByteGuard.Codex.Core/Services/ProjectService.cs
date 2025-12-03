@@ -68,10 +68,11 @@ public class ProjectService
                 Requirements = x.Requirements.Select(r => new ProjectRequirementDetails
                 {
                     Id = r.Id,
+                    Status = r.Status,
                     Requirement = new AsvsRequirementDetails
                     {
                         Id = r.AsvsRequirement.Id,
-                        Code = r.AsvsRequirement.Code,
+                        Code = r.AsvsRequirement.Code.ToVersionString(),
                         Ordinal = r.AsvsRequirement.Ordinal,
                         Description = r.AsvsRequirement.Description,
                         Level = r.AsvsRequirement.Level
@@ -92,10 +93,14 @@ public class ProjectService
     /// <returns>The newly created <see cref="ProjectDetails"/>.</returns>
     public async Task<ProjectDetails> CreateProjectAsync(string title, string owner, Guid asvsVersionId)
     {
-        var project = new Project();
-        project.Title = title;
-        project.Owner = owner;
-        project.AsvsVersionId = asvsVersionId;
+        var project = new Project()
+        {
+            Title = title,
+            Status = ProjectStatus.Active,
+            CreatedAt = DateTime.UtcNow,
+            Owner = owner,
+            AsvsVersionId = asvsVersionId
+        };
 
         await _context.Projects.AddAsync(project);
         await _context.SaveChangesAsync();
@@ -114,17 +119,35 @@ public class ProjectService
         return result;
     }
 
+    /// <summary>
+    /// TODO
+    /// </summary>
+    /// <param name="projectId"></param>
+    /// <param name="requirementId"></param>
+    /// <returns></returns>
     public async Task AddRequirementAsync(Guid projectId, Guid requirementId)
     {
         throw new NotImplementedException();
     }
 
+    /// <summary>
+    /// TODO
+    /// </summary>
+    /// <param name="projectId"></param>
+    /// <param name="requirementIds"></param>
+    /// <returns></returns>
     public async Task AddRequirementsAsync(Guid projectId, List<Guid> requirementIds)
     {
         throw new NotImplementedException();
     }
 
-    public async Task UpdateProjectStatusAsync(Guid proejctId, ProjectStatus newStatus)
+    /// <summary>
+    /// TODO
+    /// </summary>
+    /// <param name="projectId"></param>
+    /// <param name="newStatus"></param>
+    /// <returns></returns>
+    public async Task UpdateProjectStatusAsync(Guid projectId, ProjectStatus newStatus)
     {
         throw new NotImplementedException();
     }

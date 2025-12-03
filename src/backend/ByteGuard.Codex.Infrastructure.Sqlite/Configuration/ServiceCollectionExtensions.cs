@@ -1,12 +1,13 @@
 using ByteGuard.Codex.Core.Abstractions.DataStorage;
-using ByteGuard.Codex.Core.Entities;
-using ByteGuard.Codex.Core.Enums;
 using ByteGuard.Codex.Infrastructure.Sqlite.Seeding;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace ByteGuard.Codex.Infrastructure.Sqlite.Configuration;
 
+/// <summary>
+/// Codex SQLite service collection extensions.
+/// </summary>
 public static class ServiceCollectionExtensions
 {
     private static List<string> SupportedAsvsVersion = ["5.0.0"];

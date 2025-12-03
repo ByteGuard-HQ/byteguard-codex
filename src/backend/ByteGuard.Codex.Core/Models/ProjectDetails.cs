@@ -10,12 +10,12 @@ public record ProjectDetails
     /// <summary>
     /// Project identifier.
     /// </summary>
-    public Guid Id { get; init; }
+    public required Guid Id { get; init; }
 
     /// <summary>
     /// Project title.
     /// </summary>
-    public string Title { get; init; }
+    public required string Title { get; init; }
 
     /// <summary>
     /// Optional project description.
@@ -25,17 +25,17 @@ public record ProjectDetails
     /// <summary>
     /// Project owner.
     /// </summary>
-    public string Owner { get; init; }
+    public required string Owner { get; init; }
 
     /// <summary>
     /// Current status of the project.
     /// </summary>
-    public ProjectStatus Status { get; init; }
+    public required ProjectStatus Status { get; init; }
 
     /// <summary>
     /// Date and time of project creation.
     /// </summary>
-    public DateTime CreatedAt { get; init; }
+    public required DateTime CreatedAt { get; init; }
 
     /// <summary>
     /// Date and time of project archival.
@@ -45,10 +45,10 @@ public record ProjectDetails
     /// <summary>
     /// Identifier of the ASVS version this project is comitting to.
     /// </summary>
-    public Guid AsvsVersionId { get; init; }
+    public required Guid AsvsVersionId { get; init; }
 
     /// <summary>
     /// Collection of all project requirements this project has comitted to.
     /// </summary>
-    public IReadOnlyList<ProjectRequirementDetails> Requirements { get; init; }
+    public IReadOnlyList<ProjectRequirementDetails> Requirements { get; init; } = default!;
 }
