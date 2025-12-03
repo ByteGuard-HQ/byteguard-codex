@@ -1,18 +1,19 @@
 using System.Text.Json;
 using ByteGuard.Codex.Core.Entities;
 using ByteGuard.Codex.Core.Enums;
+using ByteGuard.Codex.Core.ValueObjects;
 using Microsoft.EntityFrameworkCore;
 
 namespace ByteGuard.Codex.Infrastructure.Sqlite.Seeding;
 
-public static class AsvsJsonSeeder
+internal static class AsvsJsonSeeder
 {
-    public static void SeedAsvs(DbContext context, bool _, string version)
+    internal static void SeedAsvs(DbContext context, bool _, string version)
     {
         SeedInternalAsync(context, _, version, CancellationToken.None).GetAwaiter().GetResult();
     }
 
-    public static async Task SeedAsvsAsync(DbContext context, bool _, string version, CancellationToken cancellationToken)
+    internal static async Task SeedAsvsAsync(DbContext context, bool _, string version, CancellationToken cancellationToken)
     {
         await SeedInternalAsync(context, _, version, cancellationToken);
     }
@@ -31,6 +32,7 @@ public static class AsvsJsonSeeder
         asvsVersion.VersionNumber = root.Version;
         asvsVersion.Name = $"OWASP ASVS {root.Version}";
         asvsVersion.Description = root.Description;
+        asvsVersion.IsReadOnly = true;
 
         await context.Set<AsvsVersion>().AddAsync(asvsVersion);
         await context.SaveChangesAsync();
@@ -43,12 +45,12 @@ public static class AsvsJsonSeeder
             if (!chapters.TryGetValue(c.Shortcode, out var chapter))
             {
                 chapter = new AsvsChapter();
-                chapter.Code = c.Shortcode;
+                chapter.Code = AsvsCode.Parse(c.Shortcode);
                 chapter.Ordinal = c.Ordinal;
                 chapter.Title = c.Name;
                 chapter.AsvsVersionId = asvsVersion.Id;
 
-                chapters.Add(chapter.Code, chapter);
+                chapters.Add(chapter.Code.ToString(), chapter);
                 await context.Set<AsvsChapter>().AddAsync(chapter);
             }
 
@@ -57,19 +59,19 @@ public static class AsvsJsonSeeder
                 if (!sections.TryGetValue(s.Shortcode, out var section))
                 {
                     section = new AsvsSection();
-                    section.Code = s.Shortcode;
+                    section.Code = AsvsCode.Parse(s.Shortcode);
                     section.Ordinal = s.Ordinal;
                     section.Name = s.Name;
                     section.AsvsChapter = chapter;
 
-                    sections.Add(section.Code, section);
+                    sections.Add(section.Code.ToString(), section);
                     await context.Set<AsvsSection>().AddAsync(section);
                 }
 
                 foreach (var r in s.Items)
                 {
                     var requirement = new AsvsRequirement();
-                    requirement.Code = r.Shortcode;
+                    requirement.Code = AsvsCode.Parse(r.Shortcode);
                     requirement.Ordinal = r.Ordinal;
                     requirement.Description = r.Description;
                     requirement.Level = ParseLevel(r.L);
@@ -107,7 +109,7 @@ public static class AsvsJsonSeeder
             PropertyNameCaseInsensitive = true
         };
 
-        var root = JsonSerializer.Deserialize<AsvsJsonRoot>(json);
+        var root = JsonSerializer.Deserialize<AsvsJsonRoot>(json, options);
 
         return root!;
     }

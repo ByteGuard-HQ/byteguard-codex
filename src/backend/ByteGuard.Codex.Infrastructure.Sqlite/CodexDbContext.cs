@@ -1,8 +1,12 @@
 using ByteGuard.Codex.Core.Abstractions.DataStorage;
 using ByteGuard.Codex.Core.Entities;
+using ByteGuard.Codex.Core.ValueObjects;
+using ByteGuard.Codex.Infrastructure.Sqlite.ValueConverters;
 using Microsoft.EntityFrameworkCore;
 
 namespace ByteGuard.Codex.Infrastructure.Sqlite;
+
+#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
 
 public class CodexDbContext : DbContext, ICodexDbContext
 {
@@ -17,4 +21,13 @@ public class CodexDbContext : DbContext, ICodexDbContext
         : base(options)
     {
     }
+
+    protected override void ConfigureConventions(ModelConfigurationBuilder configurationBuilder)
+    {
+        configurationBuilder
+            .Properties<AsvsCode>()
+            .HaveConversion<AsvsCodeConverter>();
+    }
 }
+
+#pragma warning restore CS1591 // Missing XML comment for publicly visible type or member

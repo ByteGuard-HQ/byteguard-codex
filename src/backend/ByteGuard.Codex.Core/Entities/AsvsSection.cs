@@ -1,14 +1,50 @@
+using ByteGuard.Codex.Core.ValueObjects;
+
 namespace ByteGuard.Codex.Core.Entities;
 
+/// <summary>
+/// ASVS section.
+/// </summary>
 public sealed class AsvsSection
 {
-    public Guid Id { get; set; } // DB primary key - surrogate key
+    /// <summary>
+    /// Section identifier.
+    /// </summary>
+    public Guid Id { get; set; }
 
-    public string Code { get; set; } // e.g. V1.1, V1.2, etc.
+    /// <summary>
+    /// ASVS short code used to identifiy and reference the section.
+    /// </summary>
+    /// <remarks>
+    /// E.g. <c>"V1.1"</c>.
+    /// </remarks>
+    public AsvsCode Code { get; set; }
+
+    /// <summary>
+    /// Section ordinal, defining the order within the chapter.
+    /// </summary>
     public int Ordinal { get; set; }
-    public string Name { get; set; } // e.g. "Encoding and Sanitization Architecture"
 
+    /// <summary>
+    /// Section name.
+    /// </summary>
+    /// <remarks>
+    /// E.g. "Encoding and Sanitization Architecture"
+    /// </remarks>
+    public string Name { get; set; }
+
+    /// <summary>
+    /// Identifier of the chapter in which this section belongs.
+    /// </summary>
     public Guid AsvsChapterId { get; set; }
+
+    /// <summary>
+    /// Chapter in which this section belongs.
+    /// </summary>
     public AsvsChapter AsvsChapter { get; set; }
+
+    /// <summary>
+    /// Collection of all requirements within this section.
+    /// </summary>
     public ICollection<AsvsRequirement> AsvsRequirements { get; set; }
 }

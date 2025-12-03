@@ -6,10 +6,17 @@ using Microsoft.EntityFrameworkCore;
 
 namespace ByteGuard.Codex.Core.Services;
 
+/// <summary>
+/// Core logic when handling project specific classes.
+/// </summary>
 public class ProjectService
 {
     private readonly ICodexDbContext _context;
 
+    /// <summary>
+    /// Create a new <see cref="ProjectService"/> instance.
+    /// </summary>
+    /// <param name="context">Codex database context.</param>
     public ProjectService(ICodexDbContext context)
     {
         _context = context;
@@ -61,23 +68,14 @@ public class ProjectService
                 Requirements = x.Requirements.Select(r => new ProjectRequirementDetails
                 {
                     Id = r.Id,
-                    Requirement = r.AsvsRequirement != null ?
-                        new RequirementDetails
-                        {
-                            Id = r.AsvsRequirement.Id,
-                            Code = r.AsvsRequirement.Code,
-                            Ordinal = r.AsvsRequirement.Ordinal,
-                            Description = r.AsvsRequirement.Description,
-                            Level = r.AsvsRequirement.Level
-                        } :
-                        new RequirementDetails
-                        {
-                            Id = r.CustomRequirement!.Id,
-                            Code = r.CustomRequirement.Code,
-                            Ordinal = r.CustomRequirement.Ordinal,
-                            Description = r.CustomRequirement.Description,
-                            Level = r.CustomRequirement.Level
-                        }
+                    Requirement = new AsvsRequirementDetails
+                    {
+                        Id = r.AsvsRequirement.Id,
+                        Code = r.AsvsRequirement.Code,
+                        Ordinal = r.AsvsRequirement.Ordinal,
+                        Description = r.AsvsRequirement.Description,
+                        Level = r.AsvsRequirement.Level
+                    }
                 }).ToList().AsReadOnly()
             })
             .FirstOrDefaultAsync(x => x.Id.Equals(projectId));
@@ -94,8 +92,7 @@ public class ProjectService
     /// <returns>The newly created <see cref="ProjectDetails"/>.</returns>
     public async Task<ProjectDetails> CreateProjectAsync(string title, string owner, Guid asvsVersionId)
     {
-        var id = Guid.NewGuid();
-        var project = new Project(id);
+        var project = new Project();
         project.Title = title;
         project.Owner = owner;
         project.AsvsVersionId = asvsVersionId;

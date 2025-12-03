@@ -3,6 +3,8 @@ using Microsoft.EntityFrameworkCore;
 
 namespace ByteGuard.Codex.Core.Abstractions.DataStorage;
 
+#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
+
 public interface ICodexDbContext
 {
     public DbSet<AsvsVersion> AsvsVersions { get; set; }
@@ -14,3 +16,5 @@ public interface ICodexDbContext
 
     Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
 }
+
+#pragma warning restore CS1591 // Missing XML comment for publicly visible type or member

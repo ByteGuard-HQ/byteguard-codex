@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ByteGuard.Codex.Infrastructure.Sqlite.Migrations
 {
     [DbContext(typeof(CodexDbContext))]
-    [Migration("20251202115654_Initial")]
+    [Migration("20251203061742_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -116,6 +116,9 @@ namespace ByteGuard.Codex.Infrastructure.Sqlite.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("TEXT");
 
+                    b.Property<bool>("IsReadOnly")
+                        .HasColumnType("INTEGER");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("TEXT");
@@ -127,31 +130,6 @@ namespace ByteGuard.Codex.Infrastructure.Sqlite.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("AsvsVersions");
-                });
-
-            modelBuilder.Entity("ByteGuard.Codex.Core.Entities.CustomRequirement", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Code")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<int>("Level")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("Ordinal")
-                        .HasColumnType("INTEGER");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("CustomRequirement");
                 });
 
             modelBuilder.Entity("ByteGuard.Codex.Core.Entities.Project", b =>
@@ -196,10 +174,7 @@ namespace ByteGuard.Codex.Infrastructure.Sqlite.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("TEXT");
 
-                    b.Property<Guid?>("AsvsRequirementId")
-                        .HasColumnType("TEXT");
-
-                    b.Property<Guid?>("CustomRequirementId")
+                    b.Property<Guid>("AsvsRequirementId")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("EvidenceLink")
@@ -220,8 +195,6 @@ namespace ByteGuard.Codex.Infrastructure.Sqlite.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("AsvsRequirementId");
-
-                    b.HasIndex("CustomRequirementId");
 
                     b.HasIndex("ProjectId");
 
@@ -276,19 +249,15 @@ namespace ByteGuard.Codex.Infrastructure.Sqlite.Migrations
                 {
                     b.HasOne("ByteGuard.Codex.Core.Entities.AsvsRequirement", "AsvsRequirement")
                         .WithMany()
-                        .HasForeignKey("AsvsRequirementId");
-
-                    b.HasOne("ByteGuard.Codex.Core.Entities.CustomRequirement", "CustomRequirement")
-                        .WithMany()
-                        .HasForeignKey("CustomRequirementId");
+                        .HasForeignKey("AsvsRequirementId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("ByteGuard.Codex.Core.Entities.Project", null)
                         .WithMany("Requirements")
                         .HasForeignKey("ProjectId");
 
                     b.Navigation("AsvsRequirement");
-
-                    b.Navigation("CustomRequirement");
                 });
 
             modelBuilder.Entity("ByteGuard.Codex.Core.Entities.AsvsChapter", b =>

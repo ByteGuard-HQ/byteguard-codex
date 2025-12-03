@@ -5,6 +5,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ByteGuard.Codex.Api.Controllers
 {
+    /// <summary>
+    /// The project object represents a specific project within ByteGuard Codex and what ASVS the given project is comitting to.
+    /// </summary>
     [Route("api/[controller]")]
     [ApiController]
     [Consumes("application/json")]
@@ -13,10 +16,12 @@ namespace ByteGuard.Codex.Api.Controllers
     {
         private readonly ProjectService _projectService;
 
+#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
         public ProjectsController(ProjectService projectService)
         {
             _projectService = projectService;
         }
+#pragma warning restore CS1591 // Missing XML comment for publicly visible type or member
 
         /// <summary>
         /// Get projects

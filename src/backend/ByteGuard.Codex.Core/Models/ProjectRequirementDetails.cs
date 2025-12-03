@@ -2,12 +2,38 @@ using ByteGuard.Codex.Core.Enums;
 
 namespace ByteGuard.Codex.Core.Models;
 
+/// <summary>
+/// Project requirement details.
+/// </summary>
 public record ProjectRequirementDetails
 {
-    public Guid Id { get; set; }
-    public RequirementDetails? Requirement { get; set; }
-    public RequirementStatus Status { get; set; }
-    public string? Notes { get; set; }
-    public string? EvidenceLink { get; set; }
-    public DateTime LastUpdatedAt { get; set; }
+    /// <summary>
+    /// Project requirement identifier.
+    /// </summary>
+    public Guid Id { get; init; }
+
+    /// <summary>
+    /// ASVS requirement this project requirement is linked to.
+    /// </summary>
+    public AsvsRequirementDetails Requirement { get; init; }
+
+    /// <summary>
+    /// Current status of this specific project requirement.
+    /// </summary>
+    public RequirementStatus Status { get; init; }
+
+    /// <summary>
+    /// Optional requirements notes.
+    /// </summary>
+    public string? Notes { get; init; }
+
+    /// <summary>
+    /// Optional evidence link.
+    /// </summary>
+    public string? EvidenceLink { get; init; }
+
+    /// <summary>
+    /// Date and time of last update to the project requirement.
+    /// </summary>
+    public DateTime LastUpdatedAt { get; init; }
 }

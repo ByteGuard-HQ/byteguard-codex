@@ -18,26 +18,12 @@ namespace ByteGuard.Codex.Infrastructure.Sqlite.Migrations
                     Id = table.Column<Guid>(type: "TEXT", nullable: false),
                     VersionNumber = table.Column<string>(type: "TEXT", nullable: false),
                     Name = table.Column<string>(type: "TEXT", nullable: false),
-                    Description = table.Column<string>(type: "TEXT", nullable: true)
+                    Description = table.Column<string>(type: "TEXT", nullable: true),
+                    IsReadOnly = table.Column<bool>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AsvsVersions", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "CustomRequirement",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(type: "TEXT", nullable: false),
-                    Code = table.Column<string>(type: "TEXT", nullable: false),
-                    Ordinal = table.Column<int>(type: "INTEGER", nullable: false),
-                    Description = table.Column<string>(type: "TEXT", nullable: false),
-                    Level = table.Column<int>(type: "INTEGER", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_CustomRequirement", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -112,11 +98,11 @@ namespace ByteGuard.Codex.Infrastructure.Sqlite.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "TEXT", nullable: false),
-                    AsvsSectionId = table.Column<Guid>(type: "TEXT", nullable: false),
                     Code = table.Column<string>(type: "TEXT", nullable: false),
                     Ordinal = table.Column<int>(type: "INTEGER", nullable: false),
                     Description = table.Column<string>(type: "TEXT", nullable: false),
-                    Level = table.Column<int>(type: "INTEGER", nullable: false)
+                    Level = table.Column<int>(type: "INTEGER", nullable: false),
+                    AsvsSectionId = table.Column<Guid>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -135,8 +121,7 @@ namespace ByteGuard.Codex.Infrastructure.Sqlite.Migrations
                 {
                     Id = table.Column<Guid>(type: "TEXT", nullable: false),
                     Status = table.Column<int>(type: "INTEGER", nullable: false),
-                    AsvsRequirementId = table.Column<Guid>(type: "TEXT", nullable: true),
-                    CustomRequirementId = table.Column<Guid>(type: "TEXT", nullable: true),
+                    AsvsRequirementId = table.Column<Guid>(type: "TEXT", nullable: false),
                     Notes = table.Column<string>(type: "TEXT", nullable: true),
                     EvidenceLink = table.Column<string>(type: "TEXT", nullable: true),
                     LastUpdatedAt = table.Column<DateTime>(type: "TEXT", nullable: false),
@@ -149,12 +134,8 @@ namespace ByteGuard.Codex.Infrastructure.Sqlite.Migrations
                         name: "FK_ProjectRequirements_AsvsRequirements_AsvsRequirementId",
                         column: x => x.AsvsRequirementId,
                         principalTable: "AsvsRequirements",
-                        principalColumn: "Id");
-                    table.ForeignKey(
-                        name: "FK_ProjectRequirements_CustomRequirement_CustomRequirementId",
-                        column: x => x.CustomRequirementId,
-                        principalTable: "CustomRequirement",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_ProjectRequirements_Projects_ProjectId",
                         column: x => x.ProjectId,
@@ -183,11 +164,6 @@ namespace ByteGuard.Codex.Infrastructure.Sqlite.Migrations
                 column: "AsvsRequirementId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ProjectRequirements_CustomRequirementId",
-                table: "ProjectRequirements",
-                column: "CustomRequirementId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_ProjectRequirements_ProjectId",
                 table: "ProjectRequirements",
                 column: "ProjectId");
@@ -206,9 +182,6 @@ namespace ByteGuard.Codex.Infrastructure.Sqlite.Migrations
 
             migrationBuilder.DropTable(
                 name: "AsvsRequirements");
-
-            migrationBuilder.DropTable(
-                name: "CustomRequirement");
 
             migrationBuilder.DropTable(
                 name: "Projects");

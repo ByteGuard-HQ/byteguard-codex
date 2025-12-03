@@ -3,6 +3,9 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace ByteGuard.Codex.Core.Configuration;
 
+/// <summary>
+/// Codex core service collection extensions.
+/// </summary>
 public static class ServiceCollectionExtensions
 {
     /// <summary>

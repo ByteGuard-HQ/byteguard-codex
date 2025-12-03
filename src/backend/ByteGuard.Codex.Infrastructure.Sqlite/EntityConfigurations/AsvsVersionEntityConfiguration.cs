@@ -23,6 +23,9 @@ internal class AsvsVersionEntityConfiguration : IEntityTypeConfiguration<AsvsVer
             .IsRequired(false)
             .HasMaxLength(2000);
 
+        builder.Property(x => x.IsReadOnly)
+            .IsRequired();
+
         builder.HasMany(x => x.AsvsChapters)
             .WithOne(x => x.AsvsVersion)
             .OnDelete(DeleteBehavior.Cascade);

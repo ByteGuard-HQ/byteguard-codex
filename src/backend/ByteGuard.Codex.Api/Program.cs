@@ -2,13 +2,20 @@ using Microsoft.AspNetCore.Mvc;
 using ByteGuard.Codex.Core.Configuration;
 using ByteGuard.Codex.Infrastructure.Sqlite.Configuration;
 using Scalar.AspNetCore;
+using ByteGuard.Codex.Api.Converters;
 
 [assembly: ApiController]
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddControllers();
+builder.Services.AddControllers()
+    .AddJsonOptions(options =>
+    {
+        // Add custom converters.
+        options.JsonSerializerOptions.Converters.Add(new AsvsCodeJsonConverter());
+    });
+
 builder.Services.AddOpenApi();
 builder.Services.AddHttpLogging(o => { });
 

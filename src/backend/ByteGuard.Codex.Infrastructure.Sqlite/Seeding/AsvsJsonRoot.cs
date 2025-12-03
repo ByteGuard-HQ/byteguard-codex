@@ -1,6 +1,6 @@
 namespace ByteGuard.Codex.Infrastructure.Sqlite.Seeding;
 
-public class AsvsJsonRoot
+internal record AsvsJsonRoot
 {
     public string Name { get; set; }
     public string ShortName { get; set; }
@@ -9,7 +9,7 @@ public class AsvsJsonRoot
     public List<AsvsJsonChapter> Requirements { get; set; }
 }
 
-public class AsvsJsonChapter
+internal record AsvsJsonChapter
 {
     public string Shortcode { get; set; }
     public int Ordinal { get; set; }
@@ -18,7 +18,7 @@ public class AsvsJsonChapter
     public List<AsvsJsonSection> Items { get; set; }
 }
 
-public class AsvsJsonSection
+internal record AsvsJsonSection
 {
     public string Shortcode { get; set; }
     public int Ordinal { get; set; }
@@ -26,7 +26,7 @@ public class AsvsJsonSection
     public List<AsvsJsonRequirement> Items { get; set; }
 }
 
-public class AsvsJsonRequirement
+internal record AsvsJsonRequirement
 {
     public string Shortcode { get; set; }
     public int Ordinal { get; set; }

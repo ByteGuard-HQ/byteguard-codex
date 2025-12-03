@@ -25,5 +25,9 @@ internal class ProjectRequirementEntityConfiguration : IEntityTypeConfiguration<
         builder.Property(x => x.LastUpdatedAt)
             .IsRequired()
             .ValueGeneratedOnAddOrUpdate();
+
+        builder.HasOne(x => x.AsvsRequirement)
+            .WithMany()
+            .OnDelete(DeleteBehavior.Cascade);
     }
 }
