@@ -10,7 +10,7 @@ public record ProjectRequirementDetails
     /// <summary>
     /// Project requirement identifier.
     /// </summary>
-    public Guid Id { get; init; }
+    public required Guid Id { get; init; }
 
     /// <summary>
     /// ASVS requirement this project requirement is linked to.

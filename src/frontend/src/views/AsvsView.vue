@@ -1,6 +1,6 @@
 <template>
   <main>
-    <h1>{{ $t('home.header') }}</h1>
+    <h1>{{ $t('asvs.header') }}</h1>
   </main>
 </template>
 
