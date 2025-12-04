@@ -9,6 +9,19 @@ using ByteGuard.Codex.Api.Converters;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.Services.AddCors(options =>
+{
+    if (builder.Environment.IsDevelopment())
+    {
+        options.AddDefaultPolicy(policy =>
+        {
+            policy.WithOrigins("http://localhost:8080")
+                .AllowAnyHeader()
+                .AllowAnyMethod();
+        });
+    }
+});
+
 builder.Services.AddControllers()
     .AddJsonOptions(options =>
     {
@@ -34,6 +47,10 @@ if (app.Environment.IsDevelopment())
         options.WithFavicon("/favicon.ico");
     });
 }
+
+app.UseRouting();
+
+app.UseCors();
 
 app.MapControllers();
 
