@@ -110,6 +110,15 @@ Please try to:
 - Add or update unit tests where relevant.
 - Keep commits reasonably scoped and well-described.
 
+### 👀 Looking for frontend contributors
+
+**ByteGuard Codex** is built with Vue 3, TypeScript, Pinia and Sass.
+
+If you enjoy frontend architecture, design systems, or just building clean UIs and want to help shape Codex, I’d love to collaborate.
+
+- Give me a shout
+- Or join the ByteGuard HQ Discord and say hi
+
 ## ⚠️ Disclaimer
 
 **ByteGuard Codex** is an independent open-source project maintained by the ByteGuard community.  
