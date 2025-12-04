@@ -1,5 +1,7 @@
 # ByteGuard Codex
 
+**ByteGuard Codex** is an application security tool for managing OWASP ASVS-based and custom organizational ASVS standards and mapping them to your software projects.
+
 > 🚧 ByteGuard Codex is currently **under active development** and not yet production-ready.  
 > API schema, UI and data model may change between releases.
 
